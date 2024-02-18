@@ -1,0 +1,5 @@
+colorlog
+pydantic
+requests
+tqdm
+toml

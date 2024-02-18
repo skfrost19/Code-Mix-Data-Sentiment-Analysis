@@ -1,0 +1,4 @@
+[model]
+name = "openchat-3.5-0106.Q8_0.gguf"
+url = "https://huggingface.co/TheBloke/openchat-3.5-0106-GGUF/resolve/main/openchat-3.5-0106.Q8_0.gguf?download=true"
+path = "models/"

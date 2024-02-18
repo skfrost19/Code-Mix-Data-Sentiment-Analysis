@@ -1,0 +1,5 @@
+codemix/
+logs/
+data/
+models/
+__pycache__/
