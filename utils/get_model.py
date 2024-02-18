@@ -21,14 +21,14 @@ def download_model() -> None:
     model_path = init_config.path
 
     try:
-        with open(model_path, "r"):
+        if not os.path.exists(model_path):
+            logger.info(f"Creating directory {model_path}")
+            os.makedirs(model_path)
+        else:
             logger.info(f"Directory {model_path} already exists")
-    except FileNotFoundError:
-        logger.info(f"Directory {model_path} does not exist, creating...")
-        os.makedirs(model_path)
     except Exception as e:
-        logger.error(f"Error checking if directory {model_path} exists: {e}")
-        raise Exception(f"Error checking if directory {model_path} exists: {e}")
+        logger.error(f"Error creating directory {model_path}: {e}")
+        raise Exception(f"Error creating directory {model_path}: {e}")
 
     try:
         with open(model_path + model_name, "r"):
