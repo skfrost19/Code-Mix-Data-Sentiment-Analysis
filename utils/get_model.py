@@ -14,6 +14,9 @@ init_config = load_model_paths(TOML_PATH)
 def download_model() -> None:
     """
     Download model from the internet
+
+    Params: None
+    Returns: None
     """
 
     model_name = init_config.name
@@ -42,7 +45,7 @@ def download_model() -> None:
 
     response = requests.get(url, stream=True)
     total_size_in_bytes = int(response.headers.get("content-length", 0))
-    block_size = 1024  # 1 Kibibyte
+    block_size = 1024
     progress_bar = tqdm(total=total_size_in_bytes, unit="iB", unit_scale=True)
     with open(model_path + model_name, "wb") as file:
         for data in response.iter_content(block_size):

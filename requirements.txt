@@ -3,3 +3,7 @@ pydantic
 requests
 tqdm
 toml
+fastapi
+jinja2
+uvicorn
+python-multipart
