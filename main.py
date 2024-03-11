@@ -1,2 +1,4 @@
-from core.logger import Logger
-from config.model_config import ModelConfig
+from utils.predictor import Predictor
+
+predictor = Predictor()
+predictor.get_model_attributes()

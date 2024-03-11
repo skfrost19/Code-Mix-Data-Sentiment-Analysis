@@ -3,9 +3,158 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
+        <title>Sentiment Analysis</title>
+        <link rel="icon" type="image/png" href="/static/images/favicon.png" />
+
+        <!-- Bootstrap CSS -->
+        <link
+            rel="stylesheet"
+            href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        />
+
+        <!-- Animate.css -->
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+
+        <style>
+            #overlay {
+                position: fixed;
+                display: none;
+                width: 100%;
+                height: 100%;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background-color: rgba(0, 0, 0, 0.5);
+                z-index: 2;
+                cursor: pointer;
+            }
+
+            #text {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                font-size: 50px;
+                color: white;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+            }
+
+            .spinner {
+                position: absolute;
+                top: 40%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                -ms-transform: translate(-50%, -50%);
+                width: 70px;
+                height: 70px;
+            }
+
+            .spinner div {
+                box-sizing: border-box;
+                display: block;
+                position: absolute;
+                width: 54px;
+                height: 54px;
+                margin: 8px;
+                border: 8px solid #fff;
+                border-radius: 50%;
+                animation: spinner 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+                border-color: #fff transparent transparent transparent;
+            }
+
+            .spinner div:nth-child(1) {
+                animation-delay: -0.45s;
+            }
+
+            .spinner div:nth-child(2) {
+                animation-delay: -0.3s;
+            }
+
+            .spinner div:nth-child(3) {
+                animation-delay: -0.15s;
+            }
+
+            @keyframes spinner {
+                0% {
+                    transform: rotate(0deg);
+                }
+                100% {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
     </head>
-    <body>
-        Main
+    <body
+        class="d-flex align-items-center justify-content-center"
+        style="height: 100vh"
+    >
+        <form class="text-center p-5 animate__animated" id="myForm">
+            <div class="form-group">
+                <textarea
+                    class="form-control"
+                    id="exampleFormControlTextarea1"
+                    rows="3"
+                    name="text"
+                ></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <div id="overlay">
+            <div class="spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <div id="text">Processing...</div>
+        </div>
+
+        <!-- jQuery and Bootstrap Bundle (includes Popper) -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
+
+        <script>
+            document
+                .getElementById("myForm")
+                .addEventListener("submit", function (event) {
+                    event.preventDefault();
+
+                    var textAreaValue = document.getElementById(
+                        "exampleFormControlTextarea1"
+                    ).value;
+
+                    document.getElementById("overlay").style.display = "block";
+
+                    fetch("/predict", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/x-www-form-urlencoded",
+                        },
+                        body: "text=" + encodeURIComponent(textAreaValue),
+                    })
+                        .then((response) => response.json())
+                        .then((data) => {
+                            console.log("Success:", data);
+                            document.getElementById("text").innerHTML =
+                                "Success!";
+                            setTimeout(function () {
+                                document.getElementById(
+                                    "overlay"
+                                ).style.display = "none";
+                                document.getElementById("text").innerHTML =
+                                    "Processing...";
+                            }, 2000);
+                        })
+                        .catch((error) => {
+                            console.error("Error:", error);
+                            document.getElementById("overlay").style.display =
+                                "none";
+                        });
+                });
+        </script>
     </body>
 </html>
