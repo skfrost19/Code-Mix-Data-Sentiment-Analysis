@@ -2,10 +2,8 @@ from fastapi import FastAPI, Request, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from utils.get_model import download_model
 from core.logger import Logger
 from config.init_config import load_model_paths
-import time
 from utils.pipeline import Pipeline
 
 
@@ -27,7 +25,6 @@ async def read_item(request: Request):
 
 @app.post("/predict/")
 async def predict(request: Request, text: str = Form(...)):
-
     result = pipeline.get_sentiment(text)
     return {"result": result}
 
