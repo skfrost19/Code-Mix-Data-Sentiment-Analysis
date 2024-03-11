@@ -6,9 +6,10 @@ from utils.get_model import download_model
 from core.logger import Logger
 from config.init_config import load_model_paths
 import time
+from utils.pipeline import Pipeline
 
 
-logger = Logger("webui")
+logger = Logger(__name__)
 
 app = FastAPI()
 app.mount("/static", StaticFiles(directory="static"), name="static")
@@ -16,6 +17,7 @@ templates = Jinja2Templates(directory="templates")
 
 TOML_PATH = "config/paths.toml"
 init_config = load_model_paths(TOML_PATH)
+pipeline = Pipeline()
 
 
 @app.get("/", response_class=HTMLResponse)
@@ -25,11 +27,8 @@ async def read_item(request: Request):
 
 @app.post("/predict/")
 async def predict(request: Request, text: str = Form(...)):
-    # model_path = init_config["model_path"]
-    # model = download_model(model_path)
-    # sleep for 10 seconds to simulate a long running process
-    time.sleep(10)
-    result = "Dummy result " + text
+
+    result = pipeline.get_sentiment(text)
     return {"result": result}
 
 
