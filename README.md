@@ -2,7 +2,7 @@
 
 ## 👉 Introduction
 
-This project is about sentiment analysis on Code-Mix data. Code-Mixing is the phenomenon of alternating between two or more languages in a single conversation. This project aims to analyze the sentiment (positive, negative, neutral) of such data.
+This project is about sentiment analysis on Code-Mix data using Large Language Model (LLM). Code-Mixing is the phenomenon of alternating between two or more languages in a single conversation. This project aims to analyze the sentiment (positive, negative) of such data.
 
 This repository uses LLM named <b> Openchat - 3.5, 4-bit quantized </b> for sentiment analysis.
 
