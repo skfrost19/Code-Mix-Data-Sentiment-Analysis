@@ -28,7 +28,7 @@ class Predictor:
         return self.model_paths, self.model_config
 
     def __load_model(self) -> LlamaCpp:
-        logger.info("Loading LLM model")
+        logger.info(f"Loading LLM {self.model_paths.name} model")
         try:
             llm = LlamaCpp(
                 model_path=self.model_config.model_path,
@@ -44,6 +44,16 @@ class Predictor:
             raise e
 
     def get_sentiment(self, tweet: str) -> str:
+        """
+        Get sentiment of a tweet
+
+        Args:
+            tweet (str): Tweet to get sentiment of
+
+        Returns:
+            str: Sentiment of the tweet
+        """
+
         logger.info(f"Getting sentiment for tweet: {tweet}")
         try:
             response = self.llm(self.prompt.format(tweet=tweet))
