@@ -17,6 +17,13 @@ This repository uses LLM named <b> Openchat - 3.5, 4-bit quantized </b> for sent
 
 2. On windows system, run the `setup.ps1` on powershell to install the required dependencies and start the server.
 
+## 💻 Usage
+
+To run the sentiment analysis, use the following command:
+
+- Run the fastAPI server: `uvicorn webui:app --reload`
+- Navigate to `http://localhost:8000` in your browser to use the web interface.
+
 ## 📂 Project Structure
 
 The project is structured as follows:
@@ -55,14 +62,6 @@ Code-Mix-Data-Sentiment-Analysis
 └── webui.py
 
 ```
-
-## 💻 Usage
-
-To run the sentiment analysis, use the following command:
-
-- Run the fastAPI server: `uvicorn webui:app --reload`
-- Navigate to `http://localhost:8000` in your browser to use the web interface.
-
 
 ## 📚 References & Credits
 <ul>
