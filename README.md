@@ -65,7 +65,7 @@ Code-Mix-Data-Sentiment-Analysis
 
 ## 📚 References & Credits
 <ul>
-<li>[1]: Author, A. (Year). Title of the work. Publisher. URL
+<li>[1]: Openchat
 <li>[2]: TheBloke - For Quantized models
 <li>[3]: Huggingface
 <li>[4]: Langchain
