@@ -6,6 +6,9 @@ This project is about sentiment analysis on Code-Mix data using Large Language M
 
 This repository uses LLM named <b> Openchat - 3.5, 4-bit quantized </b> for sentiment analysis.
 
+## Demo
+![Demo Image](demo.png)
+
 ## 🛠️ Setup and Installation
 
 1. Clone the repository: `git clone https://github.com/skfrost19/Code-Mix-Data-Sentiment-Analysis.git`
